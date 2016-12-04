@@ -35,7 +35,7 @@ Node *bubble_sort(Node *head){
 	if(head->next == NULL)
 		return head;
 
-	for(tail = head; tail->next = NULL; tail = tail->next){
+	for(tail = head; tail->next == NULL; tail = tail->next){
 		;
 
 	while(tail != head->next){
