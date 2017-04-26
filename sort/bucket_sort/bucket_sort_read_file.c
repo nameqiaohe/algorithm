@@ -3,7 +3,7 @@
 # Author: xxx
 # Email: xxx@126.com
 # Create Time: 2017-04-26 00:09:54
-# Last Modified: 2017-04-26 16:47:02
+# Last Modified: 2017-04-26 16:50:32
 ####################################################*/
 /* 桶排序
  * 1、桶个数
@@ -45,7 +45,7 @@ void clear_arr(int arr[], int arr_len){
 }
 
 void bucket_sort(int arr[], int arr_len){
-	int buckets[BUCKET_NUM][BUCKET_SIZE] = {0};
+	int buckets[BUCKET_NUM][BUCKET_SIZE] = {0};//注意每个桶的大小要大于等于放入该桶中的数据个数
 
 	int i, j, k;
 	int bucket_index;
