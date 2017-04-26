@@ -3,7 +3,7 @@
 # Author: xxx
 # Email: xxx@126.com
 # Create Time: 2017-04-26 00:09:54
-# Last Modified: 2017-04-26 16:00:39
+# Last Modified: 2017-04-26 16:47:02
 ####################################################*/
 /* 桶排序
  * 1、桶个数
@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUCKET_SIZE 10	//桶大小
+#define BUCKET_SIZE 20	//桶大小
 #define BUCKET_NUM 5	//桶个数
 
 //bubble_sort
@@ -58,10 +58,16 @@ void bucket_sort(int arr[], int arr_len){
 		max = max >= arr[i] ? max : arr[i];
 	}
 	double range = (max - min + 1)/BUCKET_NUM;
+	printf("-----max = %d\n", max);
+	printf("-----min = %d\n", min);
+	printf("-----range = %f\n", range);
 
 	//遍历，将值分到对应的桶中
 	for(i = 0; i < arr_len; i++){
 		bucket_index = (int)((arr[i] - min)/range);//计算每个值应该放在第几个桶
+		if(bucket_index >= BUCKET_NUM){//避免索引超过桶的个数
+			bucket_index = BUCKET_NUM - 1;
+		}
 		printf("------bucket_index = %d,	push data : %d\n", bucket_index, arr[i]);
 
 		for(j = 0; j < BUCKET_SIZE; j++){//如果有多个值放入同一个桶中，避免覆盖，应向后追加
@@ -77,7 +83,7 @@ void bucket_sort(int arr[], int arr_len){
 	//桶内作排序，排好序的值对应放回原数组
 	for(i = 0; i < BUCKET_NUM; i++){//若每个桶中的值不止一个，需要在该桶内做一个排序
 		bucket_real_len = 0;
-		for(j = 0; j < 10; j++){//计算该桶中有几个值
+		for(j = 0; j < BUCKET_SIZE; j++){//计算该桶中有几个值
 			if(buckets[i][j] == 0){
 				break;
 			}else{
@@ -87,7 +93,7 @@ void bucket_sort(int arr[], int arr_len){
 		sort(buckets[i], bucket_real_len);//这里采用冒泡排序
 
 		//将排好序的值 放入原数组中对应的位置
-		for(j = 0; j < 10; j++){
+		for(j = 0; j < BUCKET_SIZE; j++){
 			if(buckets[i][j] == 0){
 				break;
 			}else{
