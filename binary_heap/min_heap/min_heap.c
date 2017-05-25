@@ -3,7 +3,7 @@
 # Author: xxx
 # Email: xxx@126.com
 # Create Time: 2017-05-17 21:28:21
-# Last Modified: 2017-05-17 22:10:44
+# Last Modified: 2017-05-25 18:22:46
 ####################################################*/
 #include "min_heap.h"
 
@@ -39,8 +39,8 @@ void min_heap_filter_down(int start, int end){
 
 	while(l_index <= end){
 		// l_index 是左孩子，l_index + 1是右孩子
-		// 左右两孩子中选择较大者，即m_heap[l_index + 1]
-		if(l_index < end && m_heap[l_index] < m_heap[l_index + 1]){
+		// 左右两孩子中选择较小者，即m_heap[l_index + 1]
+		if(l_index < end && m_heap[l_index] > m_heap[l_index + 1]){
 			l_index++;
 		}
 
@@ -76,7 +76,7 @@ int min_heap_remove(int data){
 	}
 
 	m_heap[index] = m_heap[--m_size];// 用最后元素填补
-	min_heap_filter_down(index, m_size - 1);// 从index位置开始自上向下调整为最大堆
+	min_heap_filter_down(index, m_size - 1);// 从index位置开始自上向下调整为最小堆
 
 	return 0;
 }
