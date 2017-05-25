@@ -3,9 +3,10 @@
 # Author: YanWei
 # Email: nameqiaohe@126.com
 # Create Time: 2016-06-16 19:47:12
-# Last Modified: 2016-06-16 19:47:12
+# Last Modified: 2017-05-25 11:30:47
 ####################################################*/
 #include <stdio.h>
+#include <string.h>
 
 //判断 是否为 回文字符串
 int is_palindrome(char *str){
@@ -14,10 +15,15 @@ int is_palindrome(char *str){
 
 	char *left = str;
 	char *right = str;
-	while(*right != '\0')
+#if 0
+	while(*right != '\0'){
 		right++;
-
+	}
 	right--;
+#endif
+	size_t len = strlen(str);
+	right = str + len - 1;
+
 	while(left < right){
 		if(*left != *right){
 			return -1;

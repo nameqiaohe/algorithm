@@ -3,8 +3,11 @@
 # Author: YanWei
 # Email: nameqiaohe@126.com
 # Create Time: 2016-06-03 06:34:02
-# Last Modified: 2016-06-03 06:34:02
+# Last Modified: 2017-05-25 12:57:06
 ####################################################*/
+/* 找到第一个只出现一次的字符
+ * 方法：hash */
+
 #include <stdio.h>
 #include <assert.h>
 
