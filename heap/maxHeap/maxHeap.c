@@ -6,7 +6,7 @@ MaxHeap createMaxHeap(int size){
     MaxHeap heap = (MaxHeap)malloc(sizeof(struct myHeap));
     if(heap == NULL){
         perror("malloc space for heap failed!");
-        return heap;
+        exit(1);
     }
 
     heap->datas = (int *)malloc(size*sizeof(int));
@@ -75,7 +75,24 @@ int insertMaxHeap(MaxHeap heap, int val){
 }
 
 void filterDownMaxHeap(MaxHeap heap, int startIndex, int endIndex){
+    int curIndex = startIndex;
+    int leftIndex = 2*curIndex+1;
+    int key = heap->datas[curIndex];
 
+    while(leftIndex <= endIndex){
+        if(leftIndex < endIndex && heap->datas[leftIndex] < heap->datas[leftIndex+1]){
+            leftIndex++;
+        }
+
+        if(key >= heap->datas[leftIndex]){
+            break;
+        }else{
+            heap->datas[curIndex] = heap->datas[leftIndex];
+            curIndex = leftIndex;
+            leftIndex = 2*leftIndex+1;
+        }
+    }
+    heap->datas[curIndex] = key;
 }
 
 int deleteMaxHeap(MaxHeap heap){
@@ -84,5 +101,43 @@ int deleteMaxHeap(MaxHeap heap){
         return FALSE;
     }
 
-    
+    swapData(&heap->datas[0], &heap->datas[heap->currentSize-1]);
+    heap->currentSize--;
+
+    filterDownMaxHeap(heap, 0, heap->currentSize);
+
+    return TRUE;
+}
+
+int destoryHeap(MaxHeap heap){
+    if(heap == NULL){
+        printf("Heap is invalid\n");
+        return FALSE;
+    }
+
+    if(heap->datas != NULL){
+        free(heap->datas);
+        heap->datas = NULL;
+    }
+
+    free(heap);
+    heap = NULL;
+    printf("Heap is destoryed\n");
+
+    return TRUE;
+}
+
+void displayHeap(MaxHeap heap, char *msg){
+    if(!isEmptyHeap(heap)){
+        printf("Heap is Empty\n");
+        return;
+    }
+
+    printf("---%s\n", msg);
+    int i = 0;
+    while(i < heap->currentSize){
+        printf("%d, ", heap->datas[i]);
+        i++;
+    }
+    printf("\n");
 }

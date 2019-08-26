@@ -38,4 +38,8 @@ int getDataIndex(MaxHeap heap, int val);
 
 void swapData(int *x, int *y);
 
+void displayHeap(MaxHeap heap, char *msg);
+
+int destoryHeap(MaxHeap heap);
+
 #endif
