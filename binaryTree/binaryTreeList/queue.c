@@ -77,6 +77,8 @@ TreeNode *popQueue(Queue queue){
 }
 
 Queue destoryQueue(Queue queue){
+    //由于这里的queue只分配了queue的空间，queue中的节点都是已经分配好内存的二叉树节点，
+    //因此只需要释放queue的空间，不需要再迭代释放queue中的节点
     free(queue);
     queue = NULL;
     return queue;
